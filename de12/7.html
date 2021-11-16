@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <!-- ⑥↓タイトルを変えてみよう -->
+    <title>データ分析</title>
+    <!-- ⑤スタイルシートの設定をしよう -->
+    <style>h1 {
+        position: relative;
+        padding: 0.25em 0;
+      }
+      h1:after {
+        content: "";
+        display: block;
+        height: 4px;
+        background: -webkit-linear-gradient(to right, rgb(230, 90, 90), transparent);
+        background: linear-gradient(to right, rgb(230, 90, 90), transparent);
+      }</style>
+    <!-- h1.htmlからある行をコピペしてくればOK -->
+</head>
+<body>
+    <h1>課題7:不動産屋になろう</h1>
+    <!-- 塊ごとにdivタグで区切るようにしましょう。 -->
+    <div>
+         <!-- ①↓に文字を書いてみよう -->
+<h2>ソースコード(無駄あり)</h2><br>
+<code>
+  <ol style="list-style:decimal-leading-zero outside;in-left:0;padding-left:36px;margin:0;background-color:#EEF;color:#000;">
+  <li style="background-color:#EFF;">import pandas as pd  # データ分析に用いるライブラリ</li>
+  <li style="background-color:#EEF;">import matplotlib.pyplot as plt  # グラフ表示に用いるライブラリ</li>
+  <li style="background-color:#EFF;">pd.set_option('display.unicode.east_asian_width', True)  # 表示のずれを少し緩和</li>
+  <li style="background-color:#EEF;">plt.rcParams['font.family'] = 'IPAexGothic'  # グラフ表示におけるフォントの指定</li>
+  <li style="background-color:#EFF;"></li>
+  <li style="background-color:#EEF;">data_path = "data.csv"</li>
+  <li style="background-color:#EFF;">df_data = pd.read_csv(data_path,  encoding="utf-8-sig")</li>
+  <li style="background-color:#EEF;"></li>
+  <li style="background-color:#EFF;">print(df_data.sample(10))</li>
+  <li style="background-color:#EEF;"></li>
+  <li style="background-color:#EFF;">print(df_data.shape)</li>
+  <li style="background-color:#EEF;"></li>
+  <li style="background-color:#EFF;">print(df_data.columns)</li>
+  <li style="background-color:#EEF;"></li>
+  <li style="background-color:#EFF;">print(df_data.describe())</li>
+  <li style="background-color:#EEF;"></li>
+  <li style="background-color:#EFF;">print(df_data.sort_values(by="路線", ascending=True))</li>
+  <li style="background-color:#EEF;"></li>
+  <li style="background-color:#EFF;">print(df_data.groupby("路線").mean())</li>
+  <li style="background-color:#EEF;"></li>
+  <li style="background-color:#EFF;">print(df_data["乗換時間"].value_counts(sort=False))</li>
+  <li style="background-color:#EEF;"></li>
+  <li style="background-color:#EFF;">print(df_data["路線"].value_counts(sort=False))</li>
+  <li style="background-color:#EEF;"></li>
+  <li style="background-color:#EFF;">df_count = df_data["路線"].value_counts(sort=False)</li>
+  <li style="background-color:#EEF;">df_count.plot.line()</li>
+  <li style="background-color:#EFF;">plt.show()</li>
+  <li style="background-color:#EEF;"></li>
+  <li style="background-color:#EFF;"></li>
+  <li style="background-color:#EEF;"></li>
+  <li style="background-color:#EFF;">df_mean = df_data.groupby("路線").mean()</li>
+  <li style="background-color:#EEF;">x = df_mean.index</li>
+  <li style="background-color:#EFF;">y = df_mean.loc[:, "家賃"]</li>
+  <li style="background-color:#EEF;">plt.bar(x, y)</li>
+  <li style="background-color:#EFF;">plt.xlabel("")</li>
+  <li style="background-color:#EEF;">plt.ylabel("家賃")</li>
+  <li style="background-color:#EFF;">plt.xticks(rotation=90)</li>
+  <li style="background-color:#EEF;">plt.show()</li>
+  <li style="background-color:#EFF;"></li>
+  <li style="background-color:#EEF;">df_mean = df_data.groupby("路線").mean()</li>
+  <li style="background-color:#EFF;">x = df_mean.index</li>
+  <li style="background-color:#EEF;">y = df_mean.loc[:, "乗換時間"]</li>
+  <li style="background-color:#EFF;">plt.bar(x, y)</li>
+  <li style="background-color:#EEF;">plt.xlabel("")</li>
+  <li style="background-color:#EFF;">plt.ylabel("乗換時間")</li>
+  <li style="background-color:#EEF;">plt.xticks(rotation=90)</li>
+  <li style="background-color:#EFF;">plt.show()</li>
+  <li style="background-color:#EEF;"></li>
+  <li style="background-color:#EFF;">df_mean = df_data.groupby("路線").mean()</li>
+  <li style="background-color:#EEF;">x = df_mean.index</li>
+  <li style="background-color:#EFF;">y = df_mean.loc[:, "乗換時間"]</li>
+  <li style="background-color:#EEF;">plt.bar(x, y)</li>
+  <li style="background-color:#EFF;">plt.xlabel("")</li>
+  <li style="background-color:#EEF;">plt.ylabel("乗換時間")</li>
+  <li style="background-color:#EFF;">plt.xticks(rotation=90)</li>
+  <li style="background-color:#EEF;">plt.show()</li>
+  <li style="background-color:#EFF;"></li>
+  <li style="background-color:#EEF;"></li>
+  <li style="background-color:#EFF;"></li>
+  <li style="background-color:#EEF;">mask = df_data.loc[:, "路線"] == "ＪＲ東海道本線"</li>
+  <li style="background-color:#EFF;">x = df_data[mask].groupby("駅").mean().loc[:, "合計時間"]</li>
+  <li style="background-color:#EEF;">y = df_data[mask].groupby("駅").mean().loc[:, "家賃"]</li>
+  <li style="background-color:#EFF;">plt.scatter(x, y, s=100, alpha=0.2)</li>
+  <li style="background-color:#EEF;">for xx, yy, ss in zip(x, y, x.index):</li>
+  <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;plt.text(xx, yy, ss)</li>
+  <li style="background-color:#EEF;">plt.xlabel("合計時間")</li>
+  <li style="background-color:#EFF;">plt.ylabel("家賃")</li>
+  <li style="background-color:#EEF;">plt.show()</li>
+  <li style="background-color:#EFF;"></li>
+  <li style="background-color:#EEF;">mask = df_data.loc[:, "路線"] == "小田急線"</li>
+  <li style="background-color:#EFF;">x = df_data[mask].groupby("駅").mean().loc[:, "合計時間"]</li>
+  <li style="background-color:#EEF;">y = df_data[mask].groupby("駅").mean().loc[:, "家賃"]</li>
+  <li style="background-color:#EFF;">plt.scatter(x, y, s=100, alpha=0.2)</li>
+  <li style="background-color:#EEF;">for xx, yy, ss in zip(x, y, x.index):</li>
+  <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;plt.text(xx, yy, ss)</li>
+  <li style="background-color:#EEF;">plt.xlabel("合計時間")</li>
+  <li style="background-color:#EFF;">plt.ylabel("家賃")</li>
+  <li style="background-color:#EEF;">plt.show()</li>
+  <li style="background-color:#EFF;"></li>
+  <li style="background-color:#EEF;">mask = df_data.loc[:, "路線"] == "ＪＲ南武線"</li>
+  <li style="background-color:#EFF;">x = df_data[mask].groupby("駅").mean().loc[:, "合計時間"]</li>
+  <li style="background-color:#EEF;">y = df_data[mask].groupby("駅").mean().loc[:, "家賃"]</li>
+  <li style="background-color:#EFF;">plt.scatter(x, y, s=100, alpha=0.2)</li>
+  <li style="background-color:#EEF;">for xx, yy, ss in zip(x, y, x.index):</li>
+  <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;plt.text(xx, yy, ss)</li>
+  <li style="background-color:#EEF;">plt.xlabel("合計時間")</li>
+  <li style="background-color:#EFF;">plt.ylabel("家賃")</li>
+  <li style="background-color:#EEF;">plt.show()</li>
+  </ol></code>
+</div>
+
+         <!-- ②↓に画像（imagesフォルダにあるtest.png）を挿入してみよう -->
+<ul>分析内容</ul><br>
+路線ごとの平均家賃や乗換時間を調べ、おすすめの駅を見つけることにした。<br>
+条件→家賃7万円以下、所要時間50分以内、2路線以上。<br>
+<img src="images/Figure_1.yatin.png" width="20%"><img src="images/Figure_2.time.png" width="20%"><br>
+ここから路線を絞り、JR南武線にした。<br>
+<img src="images/InkedFigure_numbu.jpg" width="25%"><br>
+南武線の各駅ごとの散布図を出してみた。これだけでは登戸駅がおすすめの駅だとは言い難い。<br>
+<ul>メリット<br></ul>
+・小田急線が通っている(快速列車が止まる、行動範囲が広がる)<br>
+・東京都に近い(より賃金が高い所へ出稼ぎができる、新宿に行きやすい)<br>
+・ドラえもんの世界観がある。<br>
+・治安が良い→家族や女性の一人暮らしでも安心。<br>
+
+         <!-- ③↓に箇条書きをしてみよう -->
+
+
+         <!-- ④↓に外部リンクを作ってみよう -->
+<a href="index.html">デザイン演習１・２トップページ</a><br>
+<a href="../index.html">XBPトップページ</a><br>
+    </div>
+
+</body>
+</html>
